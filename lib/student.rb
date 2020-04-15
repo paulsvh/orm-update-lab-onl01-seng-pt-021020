@@ -26,7 +26,18 @@ attr_reader :id
     DB[:conn].execute(sql)
   end
 
-
+  def save
+    if self.id
+      self.update
+    else
+      sql = <<-SQL
+        insert into students (name, grade)
+        values (?, ?)
+        SQL
+      DB[:conn].execute(sql, self.name, self.grade)
+      @id = DB[:conn].execute("select last_insert_rowid() from songs")[0][0]
+    end
+  end
 
 
 
