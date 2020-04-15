@@ -56,7 +56,7 @@ attr_reader :id
   def self.find_by_name(name)
     sql = "select * from students where name = ?"
     result = DB[:conn].execute(sql, name)[0]
-    song.new(result[0], result[1], result[2])
+    self.new(result[0], result[1], result[2])
   end
 
   def update
