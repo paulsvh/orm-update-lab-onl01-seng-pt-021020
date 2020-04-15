@@ -45,6 +45,14 @@ attr_reader :id
     student
   end
 
+  def self.new_from_db
+  end
+
+  def self.find_by_name(name)
+    sql = "select * from students where name = ?"
+    result = DB[:conn].execute(sql, name)[0]
+    song.new(result[0], result[1], result[2])
+  end
 
 end
 
