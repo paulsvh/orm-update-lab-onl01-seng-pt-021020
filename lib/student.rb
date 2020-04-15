@@ -10,7 +10,16 @@ attr_reader :idea
     @grade = grade
   end
 
-
+  def self.create_table
+    sql = <<-SQL
+      create table if not exists students (
+        id integer primary key,
+        name text,
+        grade integer
+        )
+        SQL
+    DB[:conn].execute(sql)
+  end
 
 
 end
